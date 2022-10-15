@@ -9,18 +9,18 @@ import java.util.Optional;
 
 @Repository
 public class ClientRepository {
+
     @Autowired
     private ClientCrudRepository clientCrudRepository;
 
     public List<Client> getAll(){
         return (List<Client>) clientCrudRepository.findAll();
     }
-
     public Optional<Client> getClient(int id){
         return clientCrudRepository.findById(id);
     }
-
     public Client save(Client client){
         return clientCrudRepository.save(client);
     }
+
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 @Service
 public class MessageService {
+
     @Autowired
     private MessageRepository messageRepository;
 
@@ -15,19 +16,19 @@ public class MessageService {
         return messageRepository.getAll();
     }
 
-    public Optional<Message> getMessage(int id){
-        return messageRepository.getMessage(id);
+    public Optional<Message> getMessage(int messageId) {
+        return messageRepository.getMessage(messageId);
     }
 
-    public Message save (Message message){
-        if (message.getIdMessage() == null){
+    public Message save(Message message){
+        if(message.getIdMessage()==null){
             return messageRepository.save(message);
-        } else {
-            Optional<Message> message1 = messageRepository.getMessage(message.getIdMessage());
-            if(message1.isPresent()){
-                return message;
-            } else {
+        }else{
+            Optional<Message> e= messageRepository.getMessage(message.getIdMessage());
+            if(e.isPresent()){
                 return messageRepository.save(message);
+            }else{
+                return message;
             }
         }
     }

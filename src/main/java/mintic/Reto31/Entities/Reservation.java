@@ -2,20 +2,21 @@ package mintic.Reto31.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 @Entity
 @Table(name = "reservation")
-public class Reservation {
+public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReservation;
     private Date startDate;
     private Date devolutionDate;
-    private String status = "created";
+    private String status="created";
 
     @ManyToOne
-    @JoinColumn(name = "machineId")
+    @JoinColumn(name = "id")
     @JsonIgnoreProperties("reservations")
     private Machine machine;
 
@@ -57,7 +58,6 @@ public class Reservation {
     public void setStatus(String status) {
         this.status = status;
     }
-
     public Machine getMachine() {
         return machine;
     }
@@ -65,7 +65,6 @@ public class Reservation {
     public void setMachine(Machine machine) {
         this.machine = machine;
     }
-
     public Client getClient() {
         return client;
     }
@@ -82,3 +81,4 @@ public class Reservation {
         this.score = score;
     }
 }
+

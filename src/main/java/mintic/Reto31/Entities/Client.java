@@ -2,10 +2,11 @@ package mintic.Reto31.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +16,13 @@ public class Client {
     private String name;
     private Integer age;
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="client")
     @JsonIgnoreProperties("client")
-    private List<Message> messages;
+    public List<Message> messages;
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="client")
     @JsonIgnoreProperties("client")
-    private List<Reservation> reservations;
+    public List<Reservation>reservations;
 
     public Integer getIdClient() {
         return idClient;

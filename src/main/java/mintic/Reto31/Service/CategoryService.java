@@ -9,26 +9,25 @@ import java.util.Optional;
 
 @Service
 public class CategoryService {
-
     @Autowired
     private CategoryRepository categoryRepository;
 
     public List<Category> getAll() {
         return categoryRepository.getAll();
     }
-    public Optional<Category> getCategory(int id){
-        return categoryRepository.getCategory(id);
+    public Optional<Category> getCategory(int categoryId) {
+        return categoryRepository.getCategory(categoryId);
     }
 
-    public Category save (Category category){
-        if (category.getId() == null){
+    public Category save(Category category) {
+        if (category.getId() == null) {
             return categoryRepository.save(category);
         } else {
             Optional<Category> category1 = categoryRepository.getCategory(category.getId());
-            if(category1.isPresent()){
-                return category;
-            } else {
+            if (category1.isPresent()) {
                 return categoryRepository.save(category);
+            } else {
+                return category;
             }
         }
     }

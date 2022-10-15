@@ -10,23 +10,22 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Machine")
+@CrossOrigin(origins = "*")
 public class MachineController {
     @Autowired
     private MachineService machineService;
-
     @GetMapping("/all")
-    public List<Machine> getAll(){
+    public List<Machine> getMachines(){
         return machineService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Machine> getTool(@PathVariable("id") int id){
-        return machineService.getMachine(id);
+    public Optional<Machine> getMachine(@PathVariable("id") int machineId) {
+        return machineService.getMachine(machineId);
     }
-
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Machine save (@RequestBody Machine machine){
+    public Machine save(@RequestBody Machine machine) {
         return machineService.save(machine);
     }
 }

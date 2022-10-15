@@ -8,25 +8,27 @@ import java.util.List;
 import java.util.Optional;
 @Service
 public class MachineService {
+
     @Autowired
     private MachineRepository machineRepository;
 
     public List<Machine> getAll(){
         return machineRepository.getAll();
     }
-    public Optional<Machine> getMachine(int id){
-        return machineRepository.getMachine(id);
+
+    public Optional<Machine> getMachine(int machineId) {
+        return machineRepository.getMachine(machineId);
     }
 
-    public Machine save (Machine machine){
-        if (machine.getId() == null){
+    public Machine save(Machine machine){
+        if(machine.getId()==null){
             return machineRepository.save(machine);
-        } else {
-            Optional<Machine> machine1 = machineRepository.getMachine(machine.getId());
-            if(machine1.isPresent()){
-                return machine;
-            } else {
+        }else{
+            Optional<Machine>e= machineRepository.getMachine(machine.getId());
+            if(e.isPresent()){
                 return machineRepository.save(machine);
+            }else{
+                return machine;
             }
         }
     }
